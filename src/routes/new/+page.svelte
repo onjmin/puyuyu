@@ -1,6 +1,5 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { onMount } from "svelte";
 
     let namespace = "";
     let content = "";
@@ -9,14 +8,17 @@
     function preview() {
         if (!namespace) return alert("名前空間を入力してください");
 
-        // sessionStorage に保存（Markdown/HTML 両方対応）
-        sessionStorage.setItem(
+        localStorage.setItem(
             `page:${namespace}`,
             JSON.stringify({ content, mode }),
         );
 
         // ページ遷移
         goto(`/${namespace}`);
+    }
+
+    function goHome() {
+        goto("/");
     }
 </script>
 
@@ -37,7 +39,7 @@
         <textarea
             bind:value={content}
             class="p-2 border rounded w-full h-40 resize-y"
-        />
+        ></textarea>
     </label>
 
     <label class="flex gap-2 items-center">
@@ -50,9 +52,16 @@
     </label>
 
     <button
-        on:click={preview}
+        onclick={preview}
         class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 w-32"
     >
         プレビュー
+    </button>
+
+    <button
+        onclick={goHome}
+        class="bg-gray-600 text-white p-2 rounded hover:bg-gray-700 w-32"
+    >
+        ホームへ戻る
     </button>
 </div>

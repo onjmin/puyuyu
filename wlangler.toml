@@ -1,6 +1,0 @@
-name = "puyuyu"
-type = "javascript"
-account_id = "8eba12ee6b63f92aaedae5749ee7c2f6"
-workers_dev = true
-compatibility_date = "2025-05-04"
-main = ".svelte-kit/cloudflare/_worker.js"

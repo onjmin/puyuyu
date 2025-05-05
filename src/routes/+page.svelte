@@ -1,17 +1,22 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import * as mylib from "$lib";
 
-    let posts: { namespace: string; content: string; mode: string }[] = [];
+    let pages: Map<string, mylib.Headline> = $state(new Map());
+    let size = $state(0);
 
-    // セッションストレージから投稿データを取得
     $effect(() => {
-        // ここで `sessionStorage` からデータを読み込む
-        const storedData = Object.keys(sessionStorage)
-            .filter((key) => key.startsWith("page:"))
-            .map((key) => JSON.parse(sessionStorage.getItem(key)!));
-
-        // 投稿データをセット
-        posts = storedData;
+        const { json } = mylib.headline;
+        const userData = json
+            ? Object.entries(json).map(([namespace, title]) => ({
+                  namespace,
+                  title,
+              }))
+            : [];
+        for (const data of [...userData, ...mylib.fixed]) {
+            pages.set(data.namespace, data);
+        }
+        size = pages.size;
     });
 
     function viewPost(namespace: string) {
@@ -34,19 +39,19 @@
 <!-- 投稿一覧 -->
 <h2 class="text-xl font-bold mt-8 mb-4 text-center">投稿一覧</h2>
 
-{#if posts.length > 0}
+{#if size > 0}
     <ul class="space-y-4">
-        {#each posts as post}
-            <li
-                class="border p-4 rounded hover:bg-gray-100 cursor-pointer"
-                on:click={() => viewPost(post.namespace)}
-            >
-                <h2 class="font-bold text-lg">{post.namespace}</h2>
-                <p class="text-sm text-gray-600">
-                    {post.mode === "markdown" ? "Markdown 投稿" : "HTML 投稿"}
-                </p>
-                <div class="mt-2 text-sm">{post.content.slice(0, 100)}...</div>
-                <!-- 投稿内容の先頭100文字表示 -->
+        {#each pages as [namespace, page]}
+            <li class="border p-0 rounded hover:bg-gray-100">
+                <a
+                    href={`/post/${namespace}`}
+                    class="block p-4 no-underline text-inherit hover:bg-gray-100"
+                >
+                    <h2 class="font-bold text-lg">{namespace}</h2>
+                    <div class="mt-2 text-sm">
+                        {page.title.slice(0, 100)}...
+                    </div>
+                </a>
             </li>
         {/each}
     </ul>
