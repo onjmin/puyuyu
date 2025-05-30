@@ -1,19 +1,20 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import * as mylib from "$lib";
+    import { type Headline, fixed } from "$lib/fixed";
+    import { headline } from "$lib/unj-storage";
 
-    let pages: Map<string, mylib.Headline> = $state(new Map());
+    const pages: Map<string, Headline> = $state(new Map());
     let size = $state(0);
 
     $effect(() => {
-        const { json } = mylib.headline;
+        const { json } = headline;
         const userData = json
             ? Object.entries(json).map(([namespace, title]) => ({
                   namespace,
                   title,
               }))
             : [];
-        for (const data of [...userData, ...mylib.fixed]) {
+        for (const data of [...userData, ...fixed]) {
             pages.set(data.namespace, data);
         }
         size = pages.size;

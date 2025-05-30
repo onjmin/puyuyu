@@ -26,18 +26,17 @@ class UnjStorage {
 		this.#reactive?.();
 	}
 	get json(): object | null {
-        try {
-            const value = load(this.#key);
-            if (!value) return null;
-            return JSON.parse(value);
-        } finally {
-            this.value = null;
-            return null;
-        }
+		try {
+			const value = load(this.#key);
+			if (!value) return null;
+			return JSON.parse(value);
+		} finally {
+			this.value = null;
+		}
 	}
-    set json(value: object | null) {
-        if (value === null) save(this.#key, null);
-        this.value = JSON.stringify(value);
+	set json(value: object | null) {
+		if (value === null) save(this.#key, null);
+		this.value = JSON.stringify(value);
 	}
 }
 
