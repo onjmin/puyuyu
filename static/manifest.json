@@ -1,0 +1,16 @@
+{
+	"name": "✋🥹 大家都是Puyuyu",
+	"short_name": "puyuyu",
+	"description": "ぷゆゆと共に作り上げる巨大サイト",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#fbeaec",
+	"theme_color": "#f09199",
+	"icons": [
+		{
+			"src": "puyuyu.png",
+			"sizes": "480x480",
+			"type": "image/png"
+		}
+	]
+}
