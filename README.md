@@ -1,41 +1,65 @@
-# puyuyu
+# Puyuyu（ぷゆゆと共に作り上げる巨大サイト）
+
 Potential Unleashed, Yet Unshaped. You Understand?
 
-# sv
+https://puyuyu.pages.dev/
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+✋🥹 みんなで「ぷゆゆ」しよう  
+ユーザーの作ったホームページが、URL付きでそのまま配信されるサービスです。
 
-## Creating a project
+## 概要 / Overview
 
-If you're seeing this, you've probably already done this step. Congrats!
+**Puyuyu** は、ユーザーが自由にホームページを作成・公開できるWebサービスです。  
+「新規作成」から始めて、「投稿一覧」でみんなの作品を眺めよう！
 
-```bash
-# create a new project in the current directory
-npx sv create
+- 🔨 ページ作成は超カンタン
+- 🌐 URLつきで即公開・シェア可能
+- 🧑‍🤝‍🧑 ぷゆゆと共に作り上げる世界
 
-# create a new project in my-app
-npx sv create my-app
-```
+## 特徴 / Features
 
-## Developing
+- ノーコードでHTMLページを作成・投稿
+- 投稿されたページは即時に公開（自動でURL生成）
+- 投稿は一覧表示され、誰でもアクセス可能
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 採用技術 / Tech Stack
 
-```bash
-npm run dev
+- **開発言語**: TypeScript  
+- **実行環境**: Volta / pnpm / Biome  
+- **フロントエンド**: SvelteKit / Tailwind CSS / Skeleton / Lucide
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## コーディング規約（ゆるい） / Coding Style (Optional)
 
-## Building
+- Skeleton + Tailwind の組み合わせ
+- 素の HTML もOK、気軽に手を動かそう
+- `@apply` は使わない（あえての非DRY）
 
-To create a production version of your app:
+## 環境構築 / Getting Started
 
-```bash
-npm run build
-```
+1. [Volta をインストール](https://docs.volta.sh/guide/getting-started)
+2. このリポジトリをクローン
+3. [pnpm をインストール](https://pnpm.io/ja/installation)
+4. VS Code で開く
+5. 推奨拡張機能を入れる
+6. `pnpm i` で依存関係をインストール
+7. よく使うコマンド:
+   - `pnpm run dev` — 開発ビルド
+   - `pnpm run prod` — 本番ビルド
 
-You can preview the production build with `npm run preview`.
+## 今後の予定 / Roadmap
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- 🚧 TODO
+
+## ライセンス / License
+
+- **AGPL-3.0**  
+  本プロジェクト全体には AGPL-3.0 ライセンスが適用されます。詳細は [`LICENSE`](./LICENSE) をご覧ください。
+
+## コントリビュート / Contributing
+
+- 改善提案、バグ報告、PR 大歓迎です！
+- Issue → Fork → Branch → PR の流れでお願いします
+
+---
+
+Pull requests are welcome! Let's build a better homepage playground together ✨
