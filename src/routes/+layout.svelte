@@ -1,11 +1,38 @@
 <script lang="ts">
 	import "../app.css";
 	import { base } from "$app/paths";
+	import { page } from "$app/state";
+	import { type Headline, fixed } from "$lib/fixed";
+	import * as unjStorage from "$lib/unj-storage";
 
 	let { children } = $props();
 
-	const title = "✋🥹 大家都是Puyuyu";
+	const defaultTitle = "✋🥹 大家都是Puyuyu";
+	let title = $state(defaultTitle);
 	const description = "ぷゆゆと共に作り上げる巨大サイト";
+
+	const pages: Map<string, Headline> = $state(new Map());
+	let size = $state(0);
+
+	$effect(() => {
+		const { json } = unjStorage.headline;
+		const userData = json
+			? Object.entries(json).map(([namespace, title]) => ({
+					namespace,
+					title,
+				}))
+			: [];
+		for (const data of [...userData, ...fixed]) {
+			pages.set(data.namespace, data);
+		}
+		size = pages.size;
+		const headline = pages.get(page.url.pathname.slice(1));
+		if (headline) {
+			title = headline.title;
+		} else {
+			title = defaultTitle;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -32,5 +59,17 @@
 	<link rel="manifest" href="{base}/manifest.json" />
 	<meta name="theme-color" content="#f09199" />
 </svelte:head>
+
+<header class="bg-gray-900 text-white px-6 py-4 shadow">
+	<nav class="flex justify-between items-center max-w-6xl mx-auto">
+		<a href="/" class="text-xl font-bold">{title}</a>
+		<ul class="flex gap-4 text-sm">
+			<li><a href="/" class="hover:underline">ページ一覧</a></li>
+			<li>
+				<a href="/admin/new" class="hover:underline">新規作成</a>
+			</li>
+		</ul>
+	</nav>
+</header>
 
 {@render children()}

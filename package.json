@@ -37,6 +37,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "0.514.0",
+		"date-fns": "4.1.0",
 		"valibot": "1.1.0"
 	}
 }

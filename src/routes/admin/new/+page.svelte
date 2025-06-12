@@ -26,12 +26,18 @@
 
 <div class="flex flex-col gap-4">
     <label>
-        名前空間（英数字、スラッシュ、ドット含む）:
-        <input
-            bind:value={namespace}
-            placeholder="例: user/abc.def"
-            class="p-2 border rounded w-full"
-        />
+        <div
+            class="flex items-center border rounded overflow-hidden w-full max-w-md"
+        >
+            <span class="px-2 bg-gray-100 text-gray-600 select-none">
+                {import.meta.env.VITE_BASE_URL}
+            </span>
+            <input
+                class="flex-1 px-2 py-1 outline-none"
+                bind:value={namespace}
+                placeholder="puyuyu"
+            />
+        </div>
     </label>
 
     <label>
@@ -42,26 +48,12 @@
         ></textarea>
     </label>
 
-    <label class="flex gap-2 items-center">
-        <input type="radio" name="mode" value="html" bind:group={mode} />
-        HTML
-    </label>
-    <label class="flex gap-2 items-center">
-        <input type="radio" name="mode" value="markdown" bind:group={mode} />
-        Markdown
-    </label>
-
-    <button
-        onclick={preview}
-        class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 w-32"
-    >
-        プレビュー
-    </button>
-
-    <button
-        onclick={goHome}
-        class="bg-gray-600 text-white p-2 rounded hover:bg-gray-700 w-32"
-    >
-        ホームへ戻る
-    </button>
+    <div class="flex gap-4">
+        <button
+            onclick={preview}
+            class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 w-32"
+        >
+            プレビュー
+        </button>
+    </div>
 </div>
