@@ -3,19 +3,20 @@
 	import { base } from "$app/paths";
 	import { page } from "$app/state";
 	import { type Headline, fixed } from "$lib/fixed";
-	import * as unjStorage from "$lib/unj-storage";
+	import { UnjStorage, headline } from "$lib/unj-storage";
 
 	let { children } = $props();
 
 	const defaultTitle = "✋🥹 大家都是Puyuyu";
 	let title = $state(defaultTitle);
+	let pageHTML: string | undefined = $state();
 	const description = "ぷゆゆと共に作り上げる巨大サイト";
 
 	const pages: Map<string, Headline> = $state(new Map());
 	let size = $state(0);
 
 	$effect(() => {
-		const { json } = unjStorage.headline;
+		const { json } = headline;
 		const userData = json
 			? Object.entries(json).map(([namespace, title]) => ({
 					namespace,
@@ -26,9 +27,12 @@
 			pages.set(data.namespace, data);
 		}
 		size = pages.size;
-		const headline = pages.get(page.url.pathname.slice(1));
-		if (headline) {
-			title = headline.title;
+		const currentPage = pages.get(page.url.pathname.slice(1));
+		if (currentPage) {
+			title = currentPage.title;
+			const value = new UnjStorage(`test###${currentPage.namespace}`)
+				?.value;
+			if (value) pageHTML = value;
 		} else {
 			title = defaultTitle;
 		}
@@ -72,4 +76,8 @@
 	</nav>
 </header>
 
-{@render children()}
+{#if pageHTML}
+	{@html pageHTML}
+{:else}
+	{@render children()}
+{/if}

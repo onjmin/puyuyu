@@ -1,24 +1,21 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
 
-    let namespace = "";
-    let content = "";
-    let mode: "html" | "markdown" = "html";
+    let namespace = $state("");
+    let content = $state("");
+    let pageHTML = $state("");
 
     function preview() {
         if (!namespace) return alert("名前空間を入力してください");
+        pageHTML = content;
 
-        localStorage.setItem(
-            `page:${namespace}`,
-            JSON.stringify({ content, mode }),
-        );
+        // localStorage.setItem(
+        //     `page:${namespace}`,
+        //     JSON.stringify({ content, mode }),
+        // );
 
-        // ページ遷移
-        goto(`/${namespace}`);
-    }
-
-    function goHome() {
-        goto("/");
+        // // ページ遷移
+        // goto(`/${namespace}`);
     }
 </script>
 
@@ -57,3 +54,4 @@
         </button>
     </div>
 </div>
+{@html pageHTML}

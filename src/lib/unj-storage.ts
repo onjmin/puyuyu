@@ -10,7 +10,7 @@ const save = (key: string, value: string | null): void => {
 	}
 };
 
-class UnjStorage {
+export class UnjStorage {
 	#key;
 	#reactive?: () => void;
 	constructor(key: string, reactive?: () => void) {
