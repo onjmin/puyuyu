@@ -1,13 +1,15 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import Editor from "$lib/Editor.svelte";
+    import type { Content } from "@tiptap/core";
 
     let namespace = $state("");
-    let content = $state("");
+    let content = $state<Content>(null);
     let pageHTML = $state("");
 
     function preview() {
         if (!namespace) return alert("名前空間を入力してください");
-        pageHTML = content;
+        // pageHTML = content;
 
         // localStorage.setItem(
         //     `page:${namespace}`,
@@ -37,13 +39,7 @@
         </div>
     </label>
 
-    <label>
-        本文（HTML または Markdown）:
-        <textarea
-            bind:value={content}
-            class="p-2 border rounded w-full h-40 resize-y"
-        ></textarea>
-    </label>
+    <Editor bind:content />
 
     <div class="flex gap-4">
         <button

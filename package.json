@@ -37,7 +37,10 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "0.514.0",
+		"@tiptap/core": "2.14.0",
+		"@tiptap/starter-kit": "2.14.0",
 		"date-fns": "4.1.0",
+		"svelte-tiptap": "2.1.0",
 		"valibot": "1.1.0"
 	}
 }
